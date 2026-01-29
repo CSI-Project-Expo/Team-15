@@ -163,7 +163,3 @@ This project was built under the **CSI Core Projects Initiative 2026**, emphasiz
 > **SentinAI is not just a model or a dashboard — it is a working, secure surveillance system designed for real-world deployment.**
 
 ---
-
-
-
-You’re building something **very competitive** here 🚀
