@@ -82,7 +82,7 @@ function Header({ systemStatus, cameraCount }) {
         >
           📶
         </button>
-        <button className="icon-btn" title="Menu">☰</button>
+        
       </div>
     </header>
   );
