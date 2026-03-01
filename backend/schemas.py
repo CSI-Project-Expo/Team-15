@@ -1,15 +1,19 @@
 from pydantic import BaseModel
 from datetime import datetime
-from typing import Optional
+from typing import Optional, List
 
-# ==================== INCIDENT/ALERT SCHEMAS ====================
+
+# =========================
+# INCIDENT / ALERT SCHEMAS
+# =========================
 
 class IncidentCreate(BaseModel):
-    type: str           # fire, accident, sos, tamper, intrusion, motion, suspicious
+    type: str
     camera_id: str
     description: str
-    severity: str = "medium"  # critical, high, medium, low, normal
+    severity: str = "medium"
     confidence: Optional[float] = None
+
 
 class Incident(BaseModel):
     id: int
@@ -27,7 +31,9 @@ class Incident(BaseModel):
         from_attributes = True
 
 
-# ==================== CAMERA SCHEMAS ====================
+# =========================
+# CAMERA SCHEMAS
+# =========================
 
 class CameraCreate(BaseModel):
     name: str
@@ -36,12 +42,14 @@ class CameraCreate(BaseModel):
     ip_address: Optional[str] = None
     rtsp_url: Optional[str] = None
 
+
 class CameraUpdate(BaseModel):
     name: Optional[str] = None
     location: Optional[str] = None
     status: Optional[str] = None
     ip_address: Optional[str] = None
     rtsp_url: Optional[str] = None
+
 
 class Camera(BaseModel):
     id: int
@@ -58,7 +66,9 @@ class Camera(BaseModel):
         from_attributes = True
 
 
-# ==================== EVENT SCHEMAS ====================
+# =========================
+# EVENT LOG SCHEMAS
+# =========================
 
 class EventCreate(BaseModel):
     type: str
@@ -66,6 +76,7 @@ class EventCreate(BaseModel):
     camera_id: Optional[str] = None
     severity: str = "normal"
     details: Optional[str] = None
+
 
 class Event(BaseModel):
     id: int
@@ -81,19 +92,23 @@ class Event(BaseModel):
         from_attributes = True
 
 
-# ==================== DETECTION SCHEMAS ====================
+# =========================
+# YOLO DETECTION SCHEMAS
+# =========================
 
 class DetectionRequest(BaseModel):
     camera_id: str
-    frame: Optional[str] = None  # Base64 encoded frame
+    frame: Optional[str] = None  # Base64 frame
 
 
 class DetectionResponse(BaseModel):
     detected: bool
-    detections: list
+    detections: List[dict]
 
 
-# ==================== RECORDING SCHEMAS ====================
+# =========================
+# RECORDING SCHEMAS
+# =========================
 
 class RecordingCreate(BaseModel):
     camera_id: int
@@ -102,6 +117,7 @@ class RecordingCreate(BaseModel):
     start_time: datetime
     duration: Optional[int] = None
     file_size: Optional[int] = None
+
 
 class Recording(BaseModel):
     id: int
